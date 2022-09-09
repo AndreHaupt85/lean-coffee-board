@@ -8,6 +8,6 @@ const cardSchema = new Schema({
 });
 
 const Card =
-    mongoose.model.Card || mongoose.model("Card", cardSchema);
+    mongoose.models.Card || mongoose.model("Card", cardSchema);
 
 export default Card;

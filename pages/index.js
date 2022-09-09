@@ -3,9 +3,24 @@ import { useState } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 import Form from "../components/Form";
+import { getAllCards } from "../services/cardServices";
 
-export default function Home() {
-  const [cardList, setCardList] = useState([]);
+export async function getServerSideProps() {
+
+  const cards = await getAllCards();
+  console.log(cards, "in")
+  return {
+    props: {
+      cards: cards,
+    },
+  };
+}
+// Props entgegennehmne
+export default function Home({ cards }) {
+  // initial state auf cards setzen
+  const [cardList, setCardList] = useState(cards);
+
+  console.log(cards, "out")
 
   function addCard(newCard) {
     setCardList([newCard, ...cardList]);
